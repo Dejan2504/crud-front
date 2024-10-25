@@ -13,13 +13,14 @@ function App() {
 
       const data = await response;
 
-      setCount(data.data.length);
-      console.log(data);
+      console.log(data.data);
+      setCount(data.data);
     };
 
     fetchData();
   }, []);
 
+  console.log("count", count && count);
   return (
     <>
       <div>
@@ -32,13 +33,20 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button
-          onClick={() => {
-            console.log(count, "aaaaa");
-            setCount((count) => count + 1);
-          }}
-        >
-          count is <code>{count}</code>
+        <button>
+          tokens in fs{" "}
+          {count ? (
+            count.map((c, i) => {
+              console.log("iz map", c, i);
+              return (
+                <div key={`${i}`}>
+                  <code>{c}</code>
+                </div>
+              );
+            })
+          ) : (
+            <div>empty</div>
+          )}
         </button>
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
